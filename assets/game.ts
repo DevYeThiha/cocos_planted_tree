@@ -12,6 +12,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     currentTree: cc.Node = null;
 
+    @property(cc.Node)
+    plantedTrees: cc.Node[] = [null];
+
     @property
     isPlaceable: boolean = true;
 
@@ -40,7 +43,7 @@ export default class NewClass extends cc.Component {
     }
 
     changeTree(event){
-        this.selectedTree = (this.selectedTree === 3)? 1 : this.selectedTree+1;
+        this.selectedTree = (this.selectedTree === 3)? 0 : this.selectedTree+1;
         console.log(this.selectedTree);
         switch (this.selectedTree) {
             case 1:
@@ -86,16 +89,18 @@ export default class NewClass extends cc.Component {
 
     placeTree(event){
         if(this.currentTree != null && this.isPlaceable && this.state === 'create'){
-
-            console.log('Created Tree',this.currentTree);
+            this.plantedTrees.push(this.currentTree);
             this.currentTree = null;
             this.plantTree(event);
+            
 
         }else if(this.state == 'delete'){
             let mousePosition  = event.getLocation();
             mousePosition  = this.node.convertToNodeSpaceAR(mousePosition);
             var collider = cc.director.getPhysicsManager().testPoint(event.getLocation());
             if(collider != null && collider != undefined){
+                let index = this.plantedTrees.findIndex((plantedTree) => plantedTree == collider.node);
+                if (index !== -1) this.plantedTrees.splice(index, 1);
                 collider.node.destroy();
             } 
         }else if(this.state == 'move' && this.currentTree == null){
@@ -141,6 +146,12 @@ export default class NewClass extends cc.Component {
       
     }
 
+    save(){
+        this.plantedTrees.forEach(plantedTree => {
+            console.log(plantedTree);
+        });
+    }
+
 
     onStart(){
       
@@ -152,9 +163,27 @@ export default class NewClass extends cc.Component {
     }
     
     onLoad () {
+        
         cc.director.getPhysicsManager().enabled = true;
         this.node.on('mousedown',this.placeTree,this);
         this.node.on('mousemove',this.dragTree,this);
     }
+
+    // firebaseConfiguration(){
+    //     import { fire } from './module.js'
+    //      // Your web app's Firebase configuration
+    //     var firebaseConfig = {
+    //         apiKey: "AIzaSyDoEnvC019HGJGYBgQI5WJMbS8K2iCdoOM",
+    //         authDomain: "mightycryptowall-planted-tree.firebaseapp.com",
+    //         databaseURL: "https://mightycryptowall-planted-tree.firebaseio.com",
+    //         projectId: "mightycryptowall-planted-tree",
+    //         storageBucket: "mightycryptowall-planted-tree.appspot.com",
+    //         messagingSenderId: "981393141663",
+    //         appId: "1:981393141663:web:2978b6176e1832b58357aa"
+    //     };
+    //     // Initialize Firebase
+    //     firebase.initializeApp(firebaseConfig);
+    //     const db = firebase.firestore();
+    // }
 
 }
