@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        273.8574468400264,
+        272.5376159348356,
         0,
         0,
         0,
@@ -414,7 +414,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -483,7 +483,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -858,7 +858,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -927,7 +927,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -1256,7 +1256,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -1325,7 +1325,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -1654,7 +1654,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -1723,7 +1723,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -1785,7 +1785,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 130,
       "height": 40
     },
     "_anchorPoint": {
@@ -2075,9 +2075,21 @@
     "tree": {
       "__uuid__": "23d71858-ebbd-4868-9f6e-7fecaf3bee90"
     },
+    "trees": [
+      {
+        "__uuid__": "23d71858-ebbd-4868-9f6e-7fecaf3bee90"
+      },
+      {
+        "__uuid__": "3d2eddcf-8121-44a7-b027-15b24390ae8c"
+      },
+      {
+        "__uuid__": "64ad4863-3105-4063-96c4-29c31ecd3071"
+      }
+    ],
     "currentTree": null,
     "isPlaceable": true,
     "state": "default",
+    "selectedTree": 0,
     "_id": "11AbWjp/NOzYKb5Ya4kwcc"
   }
 ]

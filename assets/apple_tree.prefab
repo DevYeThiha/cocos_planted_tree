@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "tree",
+    "_name": "apple_tree",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -101,7 +101,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "3f57bb63-757f-4645-8402-9ca219b2c29b"
+      "__uuid__": "05cc6c79-c1f1-4fc3-b88e-34c09ef93d5f"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -118,16 +118,6 @@
     "_id": ""
   },
   {
-    "__type__": "2bc38T+JUpBvJST86Z4WFxV",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_id": ""
-  },
-  {
     "__type__": "cc.RigidBody",
     "_name": "",
     "_objFlags": 0,
@@ -136,7 +126,7 @@
     },
     "_enabled": true,
     "_type": 2,
-    "_allowSleep": false,
+    "_allowSleep": true,
     "_gravityScale": 0,
     "_linearDamping": 0,
     "_angularDamping": 0,
@@ -149,7 +139,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "awakeOnLoad": false,
+    "awakeOnLoad": true,
     "_id": ""
   },
   {
@@ -200,12 +190,22 @@
     "_id": ""
   },
   {
+    "__type__": "2bc38T+JUpBvJST86Z4WFxV",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "23d71858-ebbd-4868-9f6e-7fecaf3bee90"
+      "__uuid__": "3d2eddcf-8121-44a7-b027-15b24390ae8c"
     },
     "fileId": "",
     "sync": false

@@ -6,6 +6,9 @@ export default class NewClass extends cc.Component {
     @property(cc.Prefab)
     tree: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    trees: cc.Prefab[]= [null];
+
     @property(cc.Node)
     currentTree: cc.Node = null;
 
@@ -14,6 +17,12 @@ export default class NewClass extends cc.Component {
 
     @property
     state: string = 'default';
+
+    // @property
+    // trees = ['Tree','AppleTree', 'OrangeTree'];
+
+    @property
+    selectedTree: number = 0;
 
     setPlaceable(status){
         this.isPlaceable = status;
@@ -31,7 +40,24 @@ export default class NewClass extends cc.Component {
     }
 
     changeTree(event){
-        event.target.children[0].children[0].getComponent(cc.Label).string='hello';
+        this.selectedTree = (this.selectedTree === 3)? 1 : this.selectedTree+1;
+        console.log(this.selectedTree);
+        switch (this.selectedTree) {
+            case 1:
+                event.target.children[0].children[0].getComponent(cc.Label).string='Apple Tree';
+                this.tree = this.trees[1];
+                break;
+            case 2:
+                event.target.children[0].children[0].getComponent(cc.Label).string='Orange Tree';
+                this.tree = this.trees[2];
+                break;
+            default:
+                event.target.children[0].children[0].getComponent(cc.Label).string='Tree';
+                this.tree = this.trees[0];
+                break;
+        }
+        // console.log(this.trees[0],this.trees[1],this.trees[2],this.trees);
+        // event.target.children[0].children[0].getComponent(cc.Label).string=this.trees[1];
     }
 
     
