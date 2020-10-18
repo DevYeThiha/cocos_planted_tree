@@ -128,7 +128,7 @@ export default class NewClass extends cc.Component {
             if(collider != null && collider != undefined){
                this.currentTree =  collider.node;
             } 
-        }else if(this.state == 'move' && this.currentTree != null){
+        }else if(this.currentTree != null && this.isPlaceable && this.state == 'move'){
             this.currentTree = null;
         }
     }
@@ -149,7 +149,8 @@ export default class NewClass extends cc.Component {
 
 
 
-    dragTree(event){   
+    dragTree(event){ 
+        
         if (this.currentTree != null){
             let mousePosition = event.getLocation();
             mousePosition = this.node.convertToNodeSpaceAR(mousePosition);
@@ -174,7 +175,7 @@ export default class NewClass extends cc.Component {
     }
     
     onLoad() {
-       const firebase = require('firebase');
+        const firebase = require('firebase');
         
         const firebaseConfig = {
             apiKey: "AIzaSyDoEnvC019HGJGYBgQI5WJMbS8K2iCdoOM",
