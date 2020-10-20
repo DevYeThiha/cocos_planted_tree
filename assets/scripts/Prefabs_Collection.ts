@@ -1,9 +1,9 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Prefabs_Collection extends cc.Component {
 
-    @property(cc.Prefab)
+    @property({type:cc.Prefab,visible:false})
     trees: cc.Prefab[]= [];
 
     getTrees () {

@@ -2,47 +2,15 @@ const {ccclass, property} = cc._decorator;
 
 
 @ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.Node)
-    currentTree: cc.Node = null;
-
-    @property(cc.Node)
-    plantedTrees: cc.Node[] = [];
-
-
-
-    @property(cc.Component)
-    trees: cc.Component = null;
-
-
-    // buttons 
-    @property(cc.Component)
-    btnPlant: cc.Component = null;
-
-    @property(cc.Component)
-    btnMove: cc.Component = null;
-
-    @property(cc.Component)
-    btnDelete: cc.Component = null;
-
-    @property(cc.Component)
-    btnChange: cc.Component = null;
-
-    @property(cc.Component)
-    btnSave: cc.Component = null;
-
-    @property(cc.Component)
-    btnLoad: cc.Component = null;
+export default class GameManager extends cc.Component {
   
-    @property
+    @property({visible: false})
     isPlaceable: boolean = true;
 
-    @property
+    @property({visible: false})
     state: string = 'default';
 
-
-    @property
+    @property({visible: false})
     selectedTree: number = 0;
 
 
@@ -163,35 +131,12 @@ export default class NewClass extends cc.Component {
     }
 
     
-
-
-    onStart(){
-      
-        
-    }
-
-    update () {
-        // console.log(this.isPlaceable);
-    }
-    
     onLoad() {
-        const firebase = require('firebase');
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyDoEnvC019HGJGYBgQI5WJMbS8K2iCdoOM",
-            authDomain: "mightycryptowall-planted-tree.firebaseapp.com",
-            databaseURL: "https://mightycryptowall-planted-tree.firebaseio.com",
-            projectId: "mightycryptowall-planted-tree",
-            storageBucket: "mightycryptowall-planted-tree.appspot.com",
-            messagingSenderId: "981393141663",
-            appId: "1:981393141663:web:2978b6176e1832b58357aa"
-        };
-        const firebase = firebase.initializeApp(firebaseConfig);
-        // Initialize Firebase
-        const db = firebase.firestore();
+        this.currentTree = null;
+        this.plantedTrees = [];
         cc.director.getPhysicsManager().enabled = true;
-        this.trees = cc.find(PREFABS.TREES_PREFABS).getComponent('prefabs_collection');
-
+        this.trees = cc.find(PREFABS.TREES_PREFABS).getComponent('Prefabs_Collection');
+        let firebaseConnection = this.node.getComponent('FirebaseConnection');
 
         //Loading Buttons
         this.btnPlant = cc.find(UI.BTN_PLANT).getComponent(cc.Button);
@@ -249,7 +194,7 @@ export default class NewClass extends cc.Component {
          },this);
 
          // Save Tree Button
-         this.btnSave.node.on('click',() => this.save(db),this);
+         this.btnSave.node.on('click',() => this.save(firebaseConnection),this);
          this.btnSave.node.on('mouseenter', function ( event ) {
              document.body.style.cursor = "pointer";
              this.hideTree(event);
@@ -260,7 +205,7 @@ export default class NewClass extends cc.Component {
          },this);
 
          // Load Tree Button
-         this.btnLoad.node.on('click',() => this.load(db),this);
+         this.btnLoad.node.on('click',() => this.load(firebaseConnection),this);
          this.btnLoad.node.on('mouseenter', function ( event ) {
              document.body.style.cursor = "pointer";
              this.hideTree(event);
@@ -275,46 +220,40 @@ export default class NewClass extends cc.Component {
         this.node.parent.on('mousemove',this.dragTree,this);
     }
 
-    save(db){
+
+    onStart(){
+      
         
-        db.collection("trees").get().then(res => {
-            res.forEach(element => {
-                element.ref.delete();
-            });
-            console.log(this.plantedTrees);
-            this.plantedTrees.forEach(plantedTree => {
-                const saveTree = {
-                    category: plantedTree.name,
-                    position_x: plantedTree.position.x,
-                    position_y: plantedTree.position.y
-                };
-               
-                db.collection('trees').add(saveTree).catch(err => console.log(err));
-                
-            });
-        }).catch(function(error) {
-            console.error("Error removing document: ", error);
-        });
+    }
+
+    update () {
+        // console.log(this.isPlaceable);
+    }
+    
+  
+    save(firebaseConnection){      
+        firebaseConnection.saveTrees(this.plantedTrees);
        
 
    
       
     }
 
-    load(db){
+    load(firebaseConnection){
         this.clearTrees();
-        db.collection("trees").get().then(res => {
+        firebaseConnection.loadTrees().then( (res) => {
             res.forEach(element => {
                 this.loadTree(element.data());
             });
-
-        }).catch(function(error) {
-            console.error("Error removing document: ", error);
-        });
+        }).catch( (err) => console.log(err));
+        // loadTrees.forEach( loadTree => {
+        //     this.loadTree(loadTree);
+        // })
+      
     }
 
     loadTree(data){
-        let newTree = cc.instantiate(this.trees.getTreeById(+data.category));
+        let newTree = cc.instantiate(this.trees.getTreeById(+data.category)); // + sign to covert integer to string
         newTree.setPosition(cc.v2(
             data.position_x, 
             data.position_y

@@ -1,5 +1,5 @@
 window.PREFABS = {
-    TREES_PREFABS: "Canvas/prefabs_collection"
+    TREES_PREFABS: "Canvas/Prefabs_Collection"
 }
 
 window.UI = {
@@ -10,3 +10,4 @@ window.UI = {
     BTN_SAVE:'Canvas/save',
     BTN_LOAD:'Canvas/load',
 }
+
